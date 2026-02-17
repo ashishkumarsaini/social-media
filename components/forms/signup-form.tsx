@@ -15,42 +15,48 @@ import Link from "next/link"
 import { Controller, useForm } from "react-hook-form"
 import { signUpFormSchema, type SignUpFormSchemaType } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { registerUser } from "@/lib/services";
+import { toast } from "sonner";
 
 export function SignupForm({
   className,
 }: React.ComponentProps<"form">) {
-  const form = useForm<SignUpFormSchemaType>({
+  const { control, formState, handleSubmit, reset } = useForm<SignUpFormSchemaType>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
+      username: 'test123',
+      email: 'test123@gmail.com',
+      password: 'qwertyuiop',
+      confirmPassword: 'qwertyuiop'
     },
   });
 
 
-  function onSubmit(data: SignUpFormSchemaType) {
-    console.log({ data });
+  async function onSubmit(formData: SignUpFormSchemaType) {
+    const { username, email, password, confirmPassword } = formData;
 
-    // toast("You submitted the following values:", {
-    //   description: (
-    //     <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-    //       <code>{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    //   position: "bottom-right",
-    //   classNames: {
-    //     content: "flex flex-col gap-2",
-    //   },
-    //   style: {
-    //     "--border-radius": "calc(var(--radius)  + 4px)",
-    //   } as React.CSSProperties,
-    // })
+    const toastPromise = registerUser({
+      body: {
+        username, email, password, confirmPassword
+      }
+    });
+
+    toast.promise(
+      toastPromise,
+      {
+        loading: "Loading...",
+        success: (data) => data.message || 'User registered successfully!',
+        error: (data) => data.message || 'Unable to register',
+      }
+    );
+
+    toastPromise.then(() => {
+      reset();
+    });
   }
 
   return (
-    <form className={cn("flex flex-col gap-6", className)} noValidate onSubmit={form.handleSubmit(onSubmit)}>
+    <form className={cn("flex flex-col gap-6", className)} noValidate onSubmit={handleSubmit(onSubmit)}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Create your account</h1>
@@ -60,7 +66,7 @@ export function SignupForm({
         </div>
         <Controller
           name="username"
-          control={form.control}
+          control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>Username</FieldLabel>
@@ -70,7 +76,7 @@ export function SignupForm({
           )} />
         <Controller
           name="email"
-          control={form.control}
+          control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -80,7 +86,7 @@ export function SignupForm({
           )} />
         <Controller
           name="password"
-          control={form.control}
+          control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -93,7 +99,7 @@ export function SignupForm({
           )} />
         <Controller
           name="confirmPassword"
-          control={form.control}
+          control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
@@ -104,7 +110,7 @@ export function SignupForm({
           )} />
         <Field />
         <Field>
-          <Button type="submit">Create Account</Button>
+          <Button type="submit" disabled={formState.isLoading}>Create Account</Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
