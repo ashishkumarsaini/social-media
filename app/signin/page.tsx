@@ -1,6 +1,6 @@
 import { LoginForm } from "@/components/forms";
 
-export default function SignPage(){
+export default function SignPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -10,13 +10,7 @@ export default function SignPage(){
           </div>
         </div>
       </div>
-      <div className="bg-muted relative hidden lg:block">
-        <img
-          src="/placeholder.svg"
-          alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
-      </div>
+      <div className="bg-muted relative hidden lg:block" />
     </div>
-  )
+  );
 }

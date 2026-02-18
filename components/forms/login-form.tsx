@@ -1,21 +1,55 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+'use client';
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { Controller, useForm } from "react-hook-form";
+import { loginFormSchema, type LoginFormSchemaType } from "@/lib/validators";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { loginUser } from "@/lib/services";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"form">) {
+export const LoginForm = () => {
+
+  const { control, formState, handleSubmit, reset } = useForm<LoginFormSchemaType>({
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      username: 'test123',
+      password: 'qwertyuiop',
+    },
+  });
+
+
+  const onSubmit = async (formData: LoginFormSchemaType) => {
+    const { username, password } = formData;
+
+    const toastPromise = loginUser({
+      body: { username, password }
+    });
+
+    toast.promise(
+      toastPromise,
+      {
+        loading: "Loading...",
+        error: (data) => data.message || 'Unable to register',
+      }
+    );
+
+    toastPromise.then(() => {
+      reset();
+    });
+  };
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form className={cn("flex flex-col gap-6")} noValidate onSubmit={handleSubmit(onSubmit)}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Login to your account</h1>
@@ -23,24 +57,33 @@ export function LoginForm({
             Enter your email below to login to your account
           </p>
         </div>
+        <Controller
+          name="username"
+          control={control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+              <Input {...field} id={field.name} placeholder="shaktimaan" required />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+        <Controller
+          name="password"
+          control={control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} type="password" required />
+              <FieldDescription>
+                Must be at between 8 - 12 characters long.
+              </FieldDescription>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
         <Field>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
-          <Input id="email" type="email" placeholder="m@example.com" required />
-        </Field>
-        <Field>
-          <div className="flex items-center">
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-            <a
-              href="#"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
-            >
-              Forgot your password?
-            </a>
-          </div>
-          <Input id="password" type="password" required />
-        </Field>
-        <Field>
-          <Button type="submit">Login</Button>
+          <Button type="submit" disabled={formState.isLoading}>Login</Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
@@ -53,5 +96,5 @@ export function LoginForm({
         </Field>
       </FieldGroup>
     </form>
-  )
-}
+  );
+};

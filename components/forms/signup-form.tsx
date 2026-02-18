@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldDescription,
@@ -9,18 +9,16 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import { Controller, useForm } from "react-hook-form"
-import { signUpFormSchema, type SignUpFormSchemaType } from "@/lib/validators"
-import { zodResolver } from "@hookform/resolvers/zod"
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { Controller, useForm } from "react-hook-form";
+import { signUpFormSchema, type SignUpFormSchemaType } from "@/lib/validators";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { registerUser } from "@/lib/services";
 import { toast } from "sonner";
 
-export function SignupForm({
-  className,
-}: React.ComponentProps<"form">) {
+export const SignupForm = () => {
   const { control, formState, handleSubmit, reset } = useForm<SignUpFormSchemaType>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -56,7 +54,7 @@ export function SignupForm({
   }
 
   return (
-    <form className={cn("flex flex-col gap-6", className)} noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form className={cn("flex flex-col gap-6")} noValidate onSubmit={handleSubmit(onSubmit)}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Create your account</h1>
@@ -70,10 +68,11 @@ export function SignupForm({
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>Username</FieldLabel>
-              <Input {...field} id={field.name} placeholder="@shaktimaan" required />
+              <Input {...field} id={field.name} placeholder="shaktimaan" required />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
-          )} />
+          )}
+        />
         <Controller
           name="email"
           control={control}
@@ -83,7 +82,8 @@ export function SignupForm({
               <Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder="m@example.com" required />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
-          )} />
+          )}
+        />
         <Controller
           name="password"
           control={control}
@@ -96,7 +96,8 @@ export function SignupForm({
               </FieldDescription>
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
-          )} />
+          )}
+        />
         <Controller
           name="confirmPassword"
           control={control}
@@ -107,7 +108,8 @@ export function SignupForm({
               <FieldDescription>Please confirm your password.</FieldDescription>
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
-          )} />
+          )}
+        />
         <Field />
         <Field>
           <Button type="submit" disabled={formState.isLoading}>Create Account</Button>
@@ -120,5 +122,5 @@ export function SignupForm({
         </Field>
       </FieldGroup>
     </form>
-  )
-}
+  );
+};

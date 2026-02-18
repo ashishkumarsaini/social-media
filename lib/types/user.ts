@@ -1,4 +1,4 @@
-import { type SignUpFormSchemaType } from "../validators";
+import { type LoginFormSchemaType, type SignUpFormSchemaType } from "../validators";
 import { type APIResponseType } from "./api";
 
 type User = {
@@ -17,4 +17,10 @@ export type RegisterUserRequestType = {
   body: SignUpFormSchemaType
 };
 
-export type RegisterUserResponseType = APIResponseType<User>
+export type RegisterUserResponseType = APIResponseType<User>;
+
+export type LoginUserRequestType = {
+  body: LoginFormSchemaType
+}
+
+export type LoginUserResponseType = APIResponseType<User>;

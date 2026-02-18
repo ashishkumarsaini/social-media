@@ -28,7 +28,7 @@ export const buildRequestUrl = (path: string, params?: Record<string, string>) =
 
   const query = searchParams.toString();
   return query ? `${base}?${query}` : base;
-}
+};
 
 const fetchRequest = async <T>(method: HttpMethod, path: string, options: RequestOptions = {}): Promise<T> => {
   const { headers, body } = options;
@@ -45,7 +45,7 @@ const fetchRequest = async <T>(method: HttpMethod, path: string, options: Reques
   const data = await fetch(path, fetchOptions) ;
 
   return data.json();
-}
+};
 
 
 export const api = {

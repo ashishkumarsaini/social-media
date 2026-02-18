@@ -1,3 +1,3 @@
-export const Header = ()=>{
-  return  <header className="" />
-}
+export const Header = () => {
+  return <header className="" />;
+};
