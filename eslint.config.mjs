@@ -28,7 +28,9 @@ const eslintConfig = defineConfig([
       "react/self-closing-comp": "warn",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "semi": ["error", "always"]
+      "semi": ["error", "always"],
+      "eol-last": "error",
+      "curly": "error",
     },
   },
   globalIgnores([

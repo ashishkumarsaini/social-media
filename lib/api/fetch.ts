@@ -16,7 +16,9 @@ const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8080/api/v1';
 export const buildRequestUrl = (path: string, params?: Record<string, string>) => {
   const base = path.startsWith('http') ? path : `${API_BASE_URL}${path}`;
 
-  if (!params) return base;
+  if (!params) {
+    return base;
+  }
 
   const searchParams = new URLSearchParams();
 
