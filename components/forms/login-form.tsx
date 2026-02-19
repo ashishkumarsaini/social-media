@@ -16,8 +16,11 @@ import { loginFormSchema, type LoginFormSchemaType } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { loginUser } from "@/lib/services";
+import { useDispatch } from "react-redux";
+import { saveAuthState } from "@/lib/store";
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
 
   const { control, formState, handleSubmit, reset } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
@@ -43,7 +46,9 @@ export const LoginForm = () => {
       }
     );
 
-    toastPromise.then(() => {
+    toastPromise.then(({ data }) => {
+      const { accessToken, refreshToken, user } = data;
+      dispatch(saveAuthState({ accessToken, refreshToken, user }));
       reset();
     });
   };
