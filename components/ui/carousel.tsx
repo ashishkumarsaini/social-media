@@ -33,12 +33,30 @@ const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
   const context = React.useContext(CarouselContext);
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
+  const api = context?.api;
+
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
 
   if (!context) {
     throw new Error("useCarousel must be used within a <Carousel />");
   }
 
-  return context;
+  return { ...context, current, count };
 }
 
 function Carousel({
@@ -232,6 +250,18 @@ function CarouselNext({
   );
 }
 
+function CarouselDots() {
+  const { current, count } = useCarousel();
+
+  return (
+    <div data-slot="carousel-dots" className="mt-3 m-auto max-w-fit flex gap-3">
+      {Array.from({ length: count }).fill("dot").map((_num, index) => (
+        <div key={index} className={cn("bg-secondary h-2 w-2 rounded", current - 1 === index && 'bg-primary')} />
+      ))}
+    </div>
+  );
+}
+
 export {
   type CarouselApi,
   Carousel,
@@ -239,4 +269,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots
 };

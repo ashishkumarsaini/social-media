@@ -1,13 +1,13 @@
-import { cn } from "@/lib/utils";
-import { Button, ButtonVariant, ButtonSize, Card, CardFooter, CardHeader, CardContent } from "../ui";
-import { HeartIcon, MessageCircleIcon, RepeatIcon, SendIcon } from "lucide-react";
+import { Card, CardFooter, CardHeader, CardContent } from "../ui";
 import { type FC } from "react";
 import { type Post } from "@/lib/types";
 import { PostAuthorComponent } from "./post-author";
 import { PostImageCarousel } from "./post-image-carousel";
+import { Text, TextType } from "../typography";
+import { PostCardFooter } from "./post-card-footer";
 
 export const PostCard: FC<{ post: Post }> = ({ post }) => {
-  const { author, images } = post;
+  const { author, images, comments, content, isLiked, likes, tags } = post;
 
   return (
     <Card>
@@ -16,36 +16,11 @@ export const PostCard: FC<{ post: Post }> = ({ post }) => {
       </CardHeader>
       <CardContent className='space-y-6 text-sm p-0'>
         <PostImageCarousel images={images} firstName={author.firstName} />
-        <p>
-          Lost in the colors of the night 🌌✨ Sometimes the blur reveals more than clarity.{' '}
-          <a href='#' className='text-sky-600 dark:text-sky-400'>
-            #AbstractVibes
-          </a>{' '}
-          <a href='#' className='text-sky-600 dark:text-sky-400'>
-            #Dreamscape
-          </a>{' '}
-          <a href='#' className='text-sky-600 dark:text-sky-400'>
-            #VisualPoetry
-          </a>
-        </p>
+        <Text>{content}</Text>
+        {tags.map((tag) => <Text key={tag} type={TextType.span}>#{tag} </Text>)}
       </CardContent>
       <CardFooter className='flex items-center justify-between gap-1 p-0'>
-        <Button variant={ButtonVariant.ghost} size={ButtonSize.sm} label="Heart">
-          <HeartIcon className={cn(true && 'fill-destructive stroke-destructive')} />
-          2.1K
-        </Button>
-        <Button variant={ButtonVariant.ghost} size={ButtonSize.sm} label="">
-          <MessageCircleIcon />
-          1.4K
-        </Button>
-        <Button variant={ButtonVariant.ghost} size={ButtonSize.sm} label="">
-          <RepeatIcon />
-          669
-        </Button>
-        <Button variant={ButtonVariant.ghost} size={ButtonSize.sm} label="">
-          <SendIcon />
-          1.1K
-        </Button>
+        <PostCardFooter isLiked={isLiked} likes={likes} comments={comments} />
       </CardFooter>
     </Card>
   );

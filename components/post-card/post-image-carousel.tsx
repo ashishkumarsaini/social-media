@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui";
+import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "../ui";
 import { type PostImage } from "@/lib/types";
 import Image from "next/image";
 
@@ -15,6 +15,7 @@ export const PostImageCarousel: FC<{ images: PostImage[], firstName: string }> =
       </CarouselContent>
       <CarouselPrevious label="Previous Button" className="invisible md:visible left-2.5" />
       <CarouselNext label="Next Button" className="invisible md:visible right-2.5" />
+      <CarouselDots />
     </Carousel>
   );
 };

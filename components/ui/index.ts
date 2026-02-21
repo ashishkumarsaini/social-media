@@ -23,6 +23,7 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots
 } from './carousel';
 export {
   Field,
