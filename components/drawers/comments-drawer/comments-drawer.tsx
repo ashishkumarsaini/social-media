@@ -1,24 +1,21 @@
 'use client';
 import {
-  Button,
   Drawer,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
-
-  Input
+  DrawerTitle
 } from "@/components/ui";
 import { commentsDrawerSelector, toggleCommentsDrawerState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentSection } from "./comments-section";
+import { type PostComment } from "@/lib/types";
 import commentsData from '../../../mocks/comments.json';
-import { SendHorizonal } from "lucide-react";
 import { CommentsDrawerFooter } from "./comment-drawer-footer";
 
 export const CommentsDrawer = () => {
-  const { opened, postId } = useSelector(commentsDrawerSelector);
-  const comments = commentsData.comments;
+  const { opened } = useSelector(commentsDrawerSelector);
+  const comments: PostComment[] = commentsData.comments;
 
   const dispatch = useDispatch();
 

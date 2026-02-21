@@ -37,7 +37,12 @@ export type Post = {
 
 export type PostComment = {
   _id: string;
-  author: PostAuthor;
+  author: {
+    _id: string;
+    account: User;
+    firstName: string;
+    lastName: string;
+  };
   content: string;
   createdAt: string;
   isLiked: boolean;

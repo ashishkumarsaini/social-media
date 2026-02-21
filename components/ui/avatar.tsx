@@ -2,7 +2,7 @@ import * as React from "react";
 import { Avatar as AvatarPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
-import { type PostAuthor } from "@/lib/types";
+import { type User } from "@/lib/types";
 
 function Avatar({
   className,
@@ -98,7 +98,14 @@ function AvatarGroupCount({
   );
 }
 
-function PostAvatar({ author }: { author: PostAuthor }) {
+function PostAvatar({ author }: {
+  author: {
+    _id: string;
+    account: User;
+    firstName: string;
+    lastName: string;
+  }
+}) {
   const account = author.account;
   const firstName = author.firstName;
   const lastName = author.lastName;
