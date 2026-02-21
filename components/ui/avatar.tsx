@@ -2,6 +2,7 @@ import * as React from "react";
 import { Avatar as AvatarPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
+import { type PostAuthor } from "@/lib/types";
 
 function Avatar({
   className,
@@ -97,6 +98,21 @@ function AvatarGroupCount({
   );
 }
 
+function PostAvatar({ author }: { author: PostAuthor }) {
+  const account = author.account;
+  const firstName = author.firstName;
+  const lastName = author.lastName;
+
+  const fallbackText = firstName.charAt(0) + lastName.charAt(0);
+
+  return (
+    <Avatar className='ring-ring ring-2'>
+      <AvatarImage src={account.avatar.url} alt={`${firstName} ${lastName}`} />
+      <AvatarFallback className='text-xs'>{fallbackText}</AvatarFallback>
+    </Avatar>
+  );
+}
+
 export {
   Avatar,
   AvatarImage,
@@ -104,4 +120,5 @@ export {
   AvatarBadge,
   AvatarGroup,
   AvatarGroupCount,
+  PostAvatar,
 };

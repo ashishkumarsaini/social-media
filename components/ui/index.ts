@@ -5,6 +5,7 @@ export {
   AvatarBadge,
   AvatarGroup,
   AvatarGroupCount,
+  PostAvatar,
 } from './avatar';
 export { Button, ButtonSize, ButtonVariant } from './button';
 export {
@@ -16,6 +17,18 @@ export {
   CardHeader,
   CardTitle
 } from './card';
+export {
+  Drawer,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+} from './drawer';
 export {
   type CarouselApi,
   Carousel,

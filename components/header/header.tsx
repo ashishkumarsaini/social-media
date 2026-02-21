@@ -6,7 +6,7 @@ import { UserCircle, Settings } from 'lucide-react';
 
 export const Header = () => {
   return (
-    <header className="border-b fixed w-full z-100 backdrop-blur-xl">
+    <header className="border-b fixed w-full z-49 bg-white">
       <Container className="py-3.5">
         <div className="flex items-center justify-between">
           <Link href="/" label="Home">

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { AUTH_NAMESPACE } from "./constants";
+import { AUTH_NAMESPACE, OVERLAY_NAMESPACE } from "./constants";
 import { authReducers } from "./auth";
+import { overlayReducers } from "./overlay";
 
 export const store = configureStore({
   reducer: {
-    [AUTH_NAMESPACE]: authReducers
+    [AUTH_NAMESPACE]: authReducers,
+    [OVERLAY_NAMESPACE]: overlayReducers,
   }
 });
 
