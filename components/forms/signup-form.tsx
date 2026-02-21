@@ -112,7 +112,7 @@ export const SignupForm = () => {
         />
         <Field />
         <Field>
-          <Button type="submit" disabled={formState.isLoading}>Create Account</Button>
+          <Button type="submit" label="Create Account" disabled={formState.isLoading}>Create Account</Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>

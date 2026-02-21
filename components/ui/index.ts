@@ -1,5 +1,31 @@
-export { Button, buttonVariants } from './button';
-export { Field,
+export {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarBadge,
+  AvatarGroup,
+  AvatarGroupCount,
+} from './avatar';
+export { Button, ButtonSize, ButtonVariant } from './button';
+export {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from './card';
+export {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from './carousel';
+export {
+  Field,
   FieldLabel,
   FieldDescription,
   FieldError,

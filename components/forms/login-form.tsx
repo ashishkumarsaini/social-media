@@ -88,7 +88,7 @@ export const LoginForm = () => {
           )}
         />
         <Field>
-          <Button type="submit" disabled={formState.isLoading}>Login</Button>
+          <Button type="submit" label="Login" disabled={formState.isLoading}>Login</Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>

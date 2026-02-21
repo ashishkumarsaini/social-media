@@ -2,7 +2,7 @@ import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
 import { AUTH_NAMESPACE } from '../constants';
 import { type AuthInitialState } from '@/lib/types';
 
-const initialState:AuthInitialState = {
+const initialState = {
   accessToken: '',
   refreshToken: '',
   user: {
@@ -16,7 +16,7 @@ const initialState:AuthInitialState = {
     // role: ADMIN, TBD
     username: ''
   }
-};
+} satisfies AuthInitialState as AuthInitialState;
 
 const authSlice = createSlice({
   name: AUTH_NAMESPACE,
