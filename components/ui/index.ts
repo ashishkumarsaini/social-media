@@ -6,6 +6,7 @@ export {
   AvatarGroup,
   AvatarGroupCount,
   PostAvatar,
+  UserAvatar
 } from './avatar';
 export { Button, ButtonSize, ButtonVariant } from './button';
 export {
@@ -54,3 +55,4 @@ export { Input } from './input';
 export { Label } from './label';
 export { Separator } from './separator';
 export { Toaster } from './sonner';
+export { Textarea } from './textarea';

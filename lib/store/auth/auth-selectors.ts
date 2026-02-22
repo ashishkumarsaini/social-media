@@ -1,7 +1,7 @@
-// import { createSelector } from "@reduxjs/toolkit";
-// import { AUTH_NAMESPACE } from "../constants";
-// import { store } from "../store";
+import { createSelector } from "@reduxjs/toolkit";
+import { AUTH_NAMESPACE } from "../constants";
+import { type RootState } from "../store";
 
-// const getAuthState = store.getState()[AUTH_NAMESPACE];
+const getState = (state: RootState) => state[AUTH_NAMESPACE];
 
-// export const userSelector = createSelector(getAuthState, (auth)=> auth.user);
+export const userStateSelector = createSelector([getState], (auth) => auth.user);

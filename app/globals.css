@@ -97,19 +97,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body::selection {
-  color: #FFFFFF;
-  /* Sets the text color when selected (white in this example) */
-  background-color: #FF0000;
-  /* Sets the background color behind the selected text (red in this example) */
-}
-
-/* Code for Firefox, using the vendor prefix */
-body::-moz-selection {
-  color: #FFFFFF;
-  background-color: #FF0000;
-}
-
 .dark {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);

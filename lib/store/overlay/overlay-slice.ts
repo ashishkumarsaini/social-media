@@ -1,13 +1,16 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { OVERLAY_NAMESPACE } from "../constants";
-import {  type OverlayInitialState, OVERLAY } from "@/lib/types";
+import { type OverlayInitialState, OVERLAY } from "@/lib/types";
 
-const initialState:OverlayInitialState = {
+const initialState: OverlayInitialState = {
   [OVERLAY.commentsDrawer]: {
     opened: false,
-    postId:''
+    postId: ''
   },
   [OVERLAY.mobileMenuDrawer]: {
+    opened: false,
+  },
+  [OVERLAY.createPostDrawer]: {
     opened: false,
   }
 };
@@ -16,29 +19,40 @@ const overlaySlice = createSlice({
   name: OVERLAY_NAMESPACE,
   initialState,
   reducers: {
-   toggleCommentsDrawerState: (_state, action:PayloadAction<{shouldOpen: boolean, postId:string}>) =>{
-    const {shouldOpen, postId} = action.payload;
+    toggleCommentsDrawerState: (_state, action: PayloadAction<{ shouldOpen: boolean, postId: string }>) => {
+      const { shouldOpen, postId } = action.payload;
 
-    return {
-      ...initialState,
-      [OVERLAY.commentsDrawer]: {
-        opened: shouldOpen,
-        postId: shouldOpen ? postId :''
-      }
-    };
-   },
-   toggleMobileMenuDrawerState: (_state, action: PayloadAction<{shouldOpen: boolean}>)=>{
-    const {shouldOpen} = action.payload;
-   return {
-      ...initialState,
-      [OVERLAY.mobileMenuDrawer]: {
-        opened: shouldOpen
-      }
-    };
-   }
+      return {
+        ...initialState,
+        [OVERLAY.commentsDrawer]: {
+          opened: shouldOpen,
+          postId: shouldOpen ? postId : ''
+        }
+      };
+    },
+    toggleMobileMenuDrawerState: (_state, action: PayloadAction<{ shouldOpen: boolean }>) => {
+      const { shouldOpen } = action.payload;
+
+      return {
+        ...initialState,
+        [OVERLAY.mobileMenuDrawer]: {
+          opened: shouldOpen
+        }
+      };
+    },
+    toggleCreatePostDrawerState: (_state, action: PayloadAction<{ shouldOpen: boolean }>) => {
+      const { shouldOpen } = action.payload;
+
+      return {
+        ...initialState,
+        [OVERLAY.createPostDrawer]: {
+          opened: shouldOpen
+        }
+      };
+    }
   }
 });
 
 export const overlayReducers = overlaySlice.reducer;
-export const {toggleCommentsDrawerState, toggleMobileMenuDrawerState} = overlaySlice.actions;
+export const { toggleCommentsDrawerState, toggleMobileMenuDrawerState, toggleCreatePostDrawerState } = overlaySlice.actions;
 

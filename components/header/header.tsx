@@ -1,9 +1,10 @@
 import { Container } from "../layout";
 import { Link } from "../link";
 import { Heading, HeadingLevel, HeadingSize, Text } from "../typography";
-import { Button, ButtonVariant } from "../ui";
-import { UserCircle, Settings } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import { MobileMenuButton } from "./mobile-menu-button";
+import { HeaderUserAvatar } from "./header-user-avatar";
+import { HeaderCreatePost } from "./header-create-post";
 
 export const Header = () => {
   return (
@@ -16,21 +17,15 @@ export const Header = () => {
               <Heading level={HeadingLevel.h1} size={HeadingSize.md}>Social Media</Heading>
             </Link>
           </div>
-          <div className="hidden md:block">
-            <div className="flex">
-              <Link href="/profile" label="Profile">
-                <Button variant={ButtonVariant.link} label="Profile" className="flex">
-                  <UserCircle />
-                  <Text className="block">Profile</Text>
-                </Button>
-              </Link>
-              <Link href="/settings" label="Settings">
-                <Button variant={ButtonVariant.link} label="Settings" className="flex">
-                  <Settings />
-                  <Text className="block">Settings</Text>
-                </Button>
+          <div className="flex gap-4">
+            <HeaderUserAvatar />
+            <div className="hidden md:block ">
+              <Link href="/settings" label="Settings" className="flex items-center gap-2">
+                <Settings className="size-4" />
+                <Text className="block text-sm">Settings</Text>
               </Link>
             </div>
+            <HeaderCreatePost />
           </div>
         </div>
       </Container>
