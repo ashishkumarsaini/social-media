@@ -1,5 +1,5 @@
-export {store} from './store';
+export { store } from './store';
 
-// actions
-export {resetAuthState, saveAuthState} from './auth';
-export {toggleCommentsDrawerState, commentsDrawerOpenedSelector, commentsDrawerSelector, toggleMobileMenuDrawerState, mobileMenuDrawerOpenedSelector} from './overlay';
+// actions and selectors
+export { resetAuthState, saveAuthState, userStateSelector } from './auth';
+export { toggleCommentsDrawerState, commentsDrawerOpenedSelector, commentsDrawerSelector, toggleMobileMenuDrawerState, mobileMenuDrawerOpenedSelector, toggleCreatePostDrawerState, createPostDrawerOpenedSelector } from './overlay';

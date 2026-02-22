@@ -3,6 +3,7 @@ import { Avatar as AvatarPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
 import { type User } from "@/lib/types";
+import { UserCircle } from "lucide-react";
 
 function Avatar({
   className,
@@ -120,6 +121,19 @@ function PostAvatar({ author }: {
   );
 }
 
+function UserAvatar({ user }: {
+  user: User
+}) {
+  return (
+    <Avatar className='ring-ring ring-2'>
+      <AvatarImage src={user.avatar.url} alt={user.username} />
+      <AvatarFallback className='text-xs'>
+        <UserCircle />
+      </AvatarFallback>
+    </Avatar>
+  );
+}
+
 export {
   Avatar,
   AvatarImage,
@@ -128,4 +142,5 @@ export {
   AvatarGroup,
   AvatarGroupCount,
   PostAvatar,
+  UserAvatar
 };

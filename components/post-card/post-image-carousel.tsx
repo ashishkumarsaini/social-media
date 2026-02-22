@@ -9,7 +9,7 @@ export const PostImageCarousel: FC<{ images: PostImage[], firstName: string }> =
       <CarouselContent containerClass="rounded-xl">
         {images.map(({ url, _id }, index) => (
           <CarouselItem key={_id} className="aspect-square relative">
-            <Image src={url} fill alt={`${firstName} post image ${index}`} />
+            <Image src={url} fill alt={`${firstName} post image ${index}`} className="object-cover" />
           </CarouselItem>
         ))}
       </CarouselContent>
