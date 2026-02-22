@@ -1,5 +1,6 @@
 export enum OVERLAY {
-  commentsDrawer = 'commentsDrawer'
+  commentsDrawer = 'commentsDrawer',
+  mobileMenuDrawer = 'mobileMenuDrawer'
 }
 
 export type OverlayVisibleState = {
@@ -10,6 +11,9 @@ export type CommentsDrawerOverlay = {
   postId: string;
 } & OverlayVisibleState;
 
+export type MobileMenuDrawerOverlay = OverlayVisibleState;
+
 export type OverlayInitialState = {
   [OVERLAY.commentsDrawer]: CommentsDrawerOverlay
+  [OVERLAY.mobileMenuDrawer]: MobileMenuDrawerOverlay
 }

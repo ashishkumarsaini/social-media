@@ -9,13 +9,12 @@ import {
 import { commentsDrawerSelector, toggleCommentsDrawerState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentSection } from "./comments-section";
-import { type PostComment } from "@/lib/types";
 import commentsData from '../../../mocks/comments.json';
 import { CommentsDrawerFooter } from "./comment-drawer-footer";
 
 export const CommentsDrawer = () => {
   const { opened } = useSelector(commentsDrawerSelector);
-  const comments: PostComment[] = commentsData.comments;
+  const comments = commentsData.comments;
 
   const dispatch = useDispatch();
 
@@ -25,7 +24,6 @@ export const CommentsDrawer = () => {
 
   return (
     <Drawer
-      key="bottom"
       direction="bottom"
       open={opened}
       onClose={handleClose}

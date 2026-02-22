@@ -6,6 +6,9 @@ const initialState:OverlayInitialState = {
   [OVERLAY.commentsDrawer]: {
     opened: false,
     postId:''
+  },
+  [OVERLAY.mobileMenuDrawer]: {
+    opened: false,
   }
 };
 
@@ -13,15 +16,23 @@ const overlaySlice = createSlice({
   name: OVERLAY_NAMESPACE,
   initialState,
   reducers: {
-   toggleCommentsDrawerState: (state, action:PayloadAction<{shouldOpen: boolean, postId:string}>) =>{
-    const updatedState = Object.entries(state).map(([overlayName, values])=>({[overlayName]: {...values, opened: false}}));
+   toggleCommentsDrawerState: (_state, action:PayloadAction<{shouldOpen: boolean, postId:string}>) =>{
     const {shouldOpen, postId} = action.payload;
 
     return {
-      ...updatedState,
+      ...initialState,
       [OVERLAY.commentsDrawer]: {
         opened: shouldOpen,
         postId: shouldOpen ? postId :''
+      }
+    };
+   },
+   toggleMobileMenuDrawerState: (_state, action: PayloadAction<{shouldOpen: boolean}>)=>{
+    const {shouldOpen} = action.payload;
+   return {
+      ...initialState,
+      [OVERLAY.mobileMenuDrawer]: {
+        opened: shouldOpen
       }
     };
    }
@@ -29,5 +40,5 @@ const overlaySlice = createSlice({
 });
 
 export const overlayReducers = overlaySlice.reducer;
-export const {toggleCommentsDrawerState} = overlaySlice.actions;
+export const {toggleCommentsDrawerState, toggleMobileMenuDrawerState} = overlaySlice.actions;
 
