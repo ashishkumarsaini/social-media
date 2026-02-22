@@ -14,6 +14,9 @@ type RequestOptions = {
 const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8080/api/v1';
 
 export const buildRequestUrl = (path: string, params?: Record<string, string>) => {
+  // eslint-disable-next-line no-console
+  console.log(API_BASE_URL);
+
   const base = path.startsWith('http') ? path : `${API_BASE_URL}${path}`;
 
   if (!params) {
@@ -44,7 +47,7 @@ const fetchRequest = async <T>(method: HttpMethod, path: string, options: Reques
     },
   };
 
-  const data = await fetch(path, fetchOptions) ;
+  const data = await fetch(path, fetchOptions);
 
   return data.json();
 };

@@ -1,7 +1,7 @@
 import { Container } from "../layout";
 import { Link } from "../link";
-import { Heading, HeadingLevel, HeadingSize, Text } from "../typography";
-import { Settings } from 'lucide-react';
+import { Heading, HeadingLevel, HeadingSize } from "../typography";
+// import { Settings } from 'lucide-react';
 import { MobileMenuButton } from "./mobile-menu-button";
 import { HeaderUserAvatar } from "./header-user-avatar";
 import { HeaderCreatePost } from "./header-create-post";
@@ -19,16 +19,16 @@ export const Header = () => {
           </div>
           <div className="flex gap-4">
             <HeaderUserAvatar />
-            <div className="hidden md:block ">
-              <Link href="/settings" label="Settings" className="flex items-center gap-2">
+            {/* <Link href="/settings" label="Settings" className="hidden md:block">
+              <div className="flex items-center justify-center gap-2">
                 <Settings className="size-4" />
                 <Text className="block text-sm">Settings</Text>
-              </Link>
-            </div>
+              </div>
+            </Link> */}
             <HeaderCreatePost />
           </div>
         </div>
-      </Container>
-    </header>
+      </Container >
+    </header >
   );
 };
