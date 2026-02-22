@@ -1,5 +1,5 @@
 export type {APIResponseType} from './api';
-export type {OverlayInitialState, CommentsDrawerOverlay} from './overlay';
+export type {OverlayInitialState, CommentsDrawerOverlay, MobileMenuDrawerOverlay} from './overlay';
 export {OVERLAY} from './overlay';
 export type {ProvidedWithChildren} from './providers';
 export type {User, UserAvatar} from './user';

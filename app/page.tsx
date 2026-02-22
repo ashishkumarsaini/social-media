@@ -1,7 +1,6 @@
 import { Container } from "@/components/layout";
 import { PostCard } from "@/components/post-card";
 import post from '../mocks/post.json';
-import { AppDrawers } from "@/components/drawers";
 
 export default function Home() {
 
@@ -25,7 +24,6 @@ export default function Home() {
         </div>
         <div className="hidden lg:block col-start-10 col-end-13">.</div>
       </div>
-      <AppDrawers />
     </Container>
   );
 }

@@ -1,2 +1,2 @@
-export {overlayReducers, toggleCommentsDrawerState} from './overlay-slice';
-export {commentsDrawerOpenedSelector, commentsDrawerSelector} from './overlay-selectors';
+export {overlayReducers, toggleCommentsDrawerState, toggleMobileMenuDrawerState} from './overlay-slice';
+export {commentsDrawerOpenedSelector, commentsDrawerSelector, mobileMenuDrawerOpenedSelector} from './overlay-selectors';
